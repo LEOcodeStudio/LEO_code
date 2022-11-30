@@ -1,0 +1,92 @@
+
+<meta http-equiv="refresh" content="0.1;url=./stop">
+<!DOCTYPE html>
+<!-- HTML written by MaoRX.cn -->
+<!-- Copyright MaoRX. All Rights Reserved. -->
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	    <title>LEO丨一个不怎么有名气的人</title>
+	    <meta name="description" content="关于" />
+	    
+	    
+	    <style type="text/css">
+        	@import "https://maorx.cn/css/pixel_about.css";
+        </style>
+		<script type="text/javascript">
+			window.onload=function(){
+				var bgbox=document.getElementById("bgbox");
+				var ua = navigator.userAgent;
+				var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+				isIphone =!ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+				isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+				isMobile = isIphone || isAndroid;
+				if(isMobile){
+					bgbox.style.backgroundSize="auto 100%";
+				}
+				bgbox.style.opacity="1";
+			};	
+		</script>
+    	
+	</head>
+
+	<body>
+		<div id="bgbox"></div>
+		
+		<div class="title">关于「LEO code」</div>
+		<div class="navbar">
+			<a href="../" title="首页" class="nav">首页</a>
+			<a href="#" title="关于" class="nav" id="current">关于</a>
+		</div>
+		<div id="content">
+			<p>我是LEO，一名喜欢代码的小学生</p>
+			<p>我在2020年4月创立了LEO code工作室，同年12月，这个网站以一个简陋的页面诞生了......</p>
+			 <!-- 请注意，以下的示例包含超链接，您可能需要手动配置样式使其不变色。如果您嫌麻烦，可以移除。 -->
+             <p id="hitokoto"><a href="#" id="hitokoto_text">:D 获取一言中...</a></p>
+             <!-- 以下写法，选取一种即可 -->
+
+             <!-- 现代写法，推荐(不支持 IE) -->
+             <script>
+             fetch('https://v1.hitokoto.cn/?c=e&c=d&c=f&c=i&c=k')
+    .then(response => response.json())
+    .then(data => {
+      
+      hitokoto.href = 'https://hitokoto.cn/?from_who=' + data.from_who
+      hitokoto.innerText = data.hitokoto
+    })
+    .catch(console.error)
+ </script>
+    			<!--[//<button id="refresh" onclick="location.reload()">刷新</button>]-->
+                <button type="button"> <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=chenyifan5498@163.com">联系我 </a></button>
+			 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=888 height=150 src="./test"></iframe>
+		</div>
+		<div class="footer">
+            <a href=".\index" title="LEO的网站" target="_blank" class="links">&copy; 2022 leocode.rth.app</a> 
+        </div>
+	</body>
+</html>
+
+
+
+</script>
+
+
+<!--[if lt IE 9]>
+<script src="//lib.baomitu.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="//lib.baomitu.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+document.oncontextmenu = new Function("event.returnValue=false") 
+
+document.onkeydown = function() {
+	if (window.event && window.event.keyCode == 123) {
+		layer.alert("注意！网站禁止调试，如果您强制调试将无法正常使用！")
+		event.keyCode = 0
+		event.returnValue = false
+	}
+	if (window.event && window.event.keyCode == 13) {
+		window.event.keyCode = 505
+	}
+}
+</script>

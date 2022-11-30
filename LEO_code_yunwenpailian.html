@@ -1,0 +1,20 @@
+<video src="http://ftp6498569.host123.sanfengyun.cn/yanjiangpailian.mp4" width="1024" height="600" controls autoplay>
+
+<!--[if lt IE 9]>
+<script src="//lib.baomitu.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="//lib.baomitu.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+document.oncontextmenu = new Function("event.returnValue=false") 
+
+document.onkeydown = function() {
+	if (window.event && window.event.keyCode == 123) {
+		layer.alert("注意！网站禁止调试，如果您强制调试将无法正常使用！")
+		event.keyCode = 0
+		event.returnValue = false
+	}
+	if (window.event && window.event.keyCode == 13) {
+		window.event.keyCode = 505
+	}
+}
+</script>

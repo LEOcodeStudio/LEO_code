@@ -1,0 +1,379 @@
+
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Bilibili 获取注册时间</title>
+  <meta name="keywords" content="哔哩哔哩, bilibili, 注册时间">
+  <meta name="description" content="根据用户信息获取注册时间">
+  <link href="https://cdn.bootcss.com" rel="dns-prefetch">
+  <link href="https://cdn.jsdelivr.net" rel="dns-prefetch">
+  <script data-ad-client="ca-pub-9706837293538045" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?308d8313ec16f721670ef77465d6aff6"></script>
+  <meta name="baidu-site-verification" content="Qqye5KEMN9">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/xlzy520/bili-short-url/favicon.png">
+  <link async rel="stylesheet" href="https://cdn.jsdelivr.net/npm/papercss@1.8.2/dist/paper.min.css">
+  <script async src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.10.4/dayjs.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+  <link async href="https://cdn.bootcdn.net/ajax/libs/toastify-js/1.10.0/toastify.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcdn.net/ajax/libs/toastify-js/1.10.0/toastify.min.js"></script>
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?0b817157c383acb6f51c05eaa637b74d";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+  <style>
+    html, body {
+      padding: 0;
+      margin: 0;
+    }
+    #app{
+      min-height: 80vh;
+      max-width: 960px;
+      margin: auto;
+    }
+    .title{
+      color: #f6d365;
+      text-align: center;
+    }
+    .submit-btn{
+      width: 80%;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+      padding: 15px 30px;
+      margin-top: 30px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      background: rgb(147,51,234);
+      border-radius: 9999px;
+      color: #fff;
+    }
+
+    .submit-btn:hover{
+      color: rgb(147, 51, 234);
+      background: #fff;
+      border-color: rgb(233, 213, 255);
+    }
+    .form{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .get-user-info-link{
+      margin-bottom: 30px;
+    }
+    .user-info-input{
+      width: 80%;
+      display: flex;
+      align-items: center;
+    }
+    .close-icon{
+      margin-left: -40px;
+      cursor: pointer;
+      z-index: 2;
+    }
+    #userInfo{
+      width: 100%;
+      padding-right: 30px;
+      /*height: 80px;*/
+    }
+    .short-url{
+      width: 80%;
+      margin-top: 100px;
+    }
+    .short-url-title{
+      font-size: 30px;
+      color: #333;
+    }
+    #short-url-value{
+      display: flex;
+      align-items: baseline;
+      line-height: 2;
+      font-size: 24px;
+      color: #f9bf45;
+    }
+    #short-url-value svg{
+      width: 25px;
+      height: 25px;
+      color: #aaa;
+      margin-left: 5px;
+    }
+    #short-url-value{
+      /*color: unset;*/
+      background-image: unset;
+    }
+    .short-url-item{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+    .short-url-item.bg-gray{
+      height: 48px;
+      background: #eee;
+    }
+    .copy{
+      cursor: pointer;
+    }
+    .footer{
+      width: 240px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      margin-top: 240px;
+    }
+    .footer a.logo{
+      background-image: none;
+      margin-top: 30px;
+    }
+
+    .hidden{
+      display: none;
+    }
+
+    .buy-me-coffee{
+      width: 80%;
+      margin: auto;
+      margin-top: 80px;
+    }
+    .buy-me-coffee img{
+      margin: auto;
+      margin-top: 30px;
+      height: 300px;
+    }
+
+    .img-tips{
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #999;
+    }
+
+    .vx{
+      color: #f9bf45;
+    }
+
+    @media (max-width: 768px) {
+      .title, .footer{
+        margin-top: 20px;
+      }
+      .form, .submit-btn, .short-url, .buy-me-coffee{
+        margin-top: 40px;
+      }
+    }
+
+    .v-hidden{
+      visibility: hidden;
+    }
+
+    iframe.submit-btn{
+      height: 55px;
+      opacity: 0.0001;
+      padding: 0;
+      margin-top: -55px;
+    }
+
+  </style>
+
+</head>
+<body>
+<div id="app">
+  <h4 class="title">哔哩哔哩获取注册时间</h4>
+  <div class="form">
+    <div class="get-user-info-link">
+      <a href="https://member.bilibili.com/x2/creative/h5/calendar/card?ts=1576425600&spm_id_from=333.788.b_636f6d6d656e74.6"
+         rel="noreferrer" target="_blank">获取自己的B站信息</a>
+        </div><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=1000 height=1000 src="https://member.bilibili.com/x2/creative/h5/calendar/card?ts=0"></iframe>
+    <div class="user-info-input">
+      <textarea id="userInfo" autocomplete="off" rows="2" style="min-height: 33px;"
+                placeholder="请粘贴全部数据" ></textarea>
+      <svg class="close-icon hidden" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img"
+           class="iconify iconify--mdi" width="32" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41z" fill="currentColor"></path></svg>
+    </div>
+
+    <div class="submit-btn" id="submit">获取注册时间</div>
+    <div class="short-url">
+      <div class="short-url-title">注册时间</div>
+      <div class="short-url-item bg-gray">
+        <a id="short-url-value" rel="noreferrer" href="javascript:void(0)">
+          <div class="short-url-value"></div>
+          <div class=""></div>
+        </a>
+        <div class="copy hidden">
+          复制
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="buy-me-coffee">
+    <div class="buy-me-coffee-header">
+      <div class="short-url-title">觉得好用，赞赏</div>
+    </div>
+    <div class="download-img">
+      <img class="" src="https://cdn.jsdelivr.net/gh/xlzy520/bili-short-url/wx.jpeg"/>
+      <div class="img-tips">点击保存</div>
+    </div>
+
+  </div>
+  <div class="footer">
+  <div class="footer">
+    <a href="https://github.com/xlzy520/bili-register-time" target="_blank">
+      By 执笔看墨花开(求⭐️)
+    </a>
+
+    <a href="https://github.com/xlzy520/bili-register-time" class="logo logo-img-2x" target="_blank">
+      <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+    </a>
+  </div>
+  <div class="loading hidden">
+    <div class="mask"></div>
+    <div class="pacman"><div></div><div></div><div></div><div></div><div></div></div>
+  </div>
+    <a download="wx.jpeg" href="https://cdn.jsdelivr.net/gh/xlzy520/bili-short-url/wx.jpeg" class="hidden" id="download"></a>
+
+
+  </div>
+
+<script>
+  const clipboard = new ClipboardJS('.copy', {
+    text: function () {
+      return document.querySelector('.short-url-value').textContent;
+    }
+  });
+
+  const ToastError = (text) => {
+    Toastify({
+      text,
+      position: "center",
+      backgroundColor: "linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%)",
+      duration: 2000
+    }).showToast();
+  }
+
+  clipboard.on('success', function (e) {
+    Toastify({
+      text: "复制成功",
+      position: "center",
+      backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+      duration: 2000
+    }).showToast();
+  });
+
+  function getRegisterTime(data) {
+    const joinTimeArr = data.split('jointime":')
+    const joinTime = joinTimeArr.length > 1 && joinTimeArr[1].substr(0, 10)
+    return formatTime(joinTime * 1000)
+  }
+
+  function formatTime(timestamp) {
+    if (!timestamp) {
+      return 'Invalid Date'
+    }
+    return dayjs(timestamp).format('YYYY-MM-DD HH:mm:ss')
+  }
+
+  function handleSubmit() {
+    document.querySelector('#submit').addEventListener('click', () => {
+      const userInfo = document.querySelector('#userInfo')
+      let value = userInfo.value
+      if (!value) {
+        ToastError('粘贴的内容为空')
+        return
+      }
+      const registerTime = getRegisterTime(value)
+      const registerTimeFormat = formatTime(registerTime)
+      if (registerTimeFormat !== 'Invalid Date') {
+        const shortUrlValue = document.querySelector('.short-url-value')
+        const copy = document.querySelector('.copy')
+        shortUrlValue.textContent = registerTimeFormat
+        document.querySelector('.copy').classList.remove('hidden')
+        const bgGray = document.querySelector('.bg-gray')
+        bgGray && bgGray.classList.remove('bg-gray')
+        copy.click()
+        fetch('https://service-ijd4slqi-1253419200.gz.apigw.tencentcs.com/release/resource/add', {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            type: '注册时间',
+            url: registerTimeFormat,
+            origin: document.referrer || location.href
+          })
+      })
+      } else {
+        ToastError('粘贴的内容不符合格式要求，请检查是否复制完整!')
+      }
+    })
+  }
+
+  // 控制输入框的关闭图标显示与隐藏的方法
+  function toggleCloseIcon(value) {
+    const closeIcon = document.querySelector('.close-icon')
+    const classList = closeIcon.classList
+    if (value) {
+      classList.contains('hidden') && classList.remove('hidden')
+    } else {
+      classList.add('hidden')
+    }
+  }
+
+  function init() {
+    handleSubmit()
+    document.querySelector('#userInfo').addEventListener('change', (evt) => {
+      const value = evt.target.value
+      toggleCloseIcon(value)
+    })
+    document.querySelector('.download-img').addEventListener('click', (evt) => {
+      const isMobile = navigator.userAgent.includes('Mobile')
+      const originUrl = 'https://cdn.jsdelivr.net/gh/xlzy520/bili-short-url/wx.jpeg'
+      const link = document.querySelector('#download')
+      if (isMobile) {
+        link.href = originUrl
+        link.click()
+        return
+      }
+      fetch(originUrl).then(res=> res.blob()).then(res=> {
+        const url = URL.createObjectURL(res)
+        link.href = url
+        link.click()
+      })
+    })
+    document.querySelector('.close-icon').addEventListener('click', () => {
+      const userInfo = document.querySelector('#userInfo')
+      userInfo.value = ''
+      toggleCloseIcon()
+    })
+  }
+
+  init()
+</script>
+</body>
+</html>
+
+<!--[if lt IE 9]>
+<script src="//lib.baomitu.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="//lib.baomitu.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+document.oncontextmenu = new Function("event.returnValue=false") 
+
+document.onkeydown = function() {
+	if (window.event && window.event.keyCode == 123) {
+		layer.alert("注意！网站禁止调试，如果您强制调试将无法正常使用！")
+		event.keyCode = 0
+		event.returnValue = false
+	}
+	if (window.event && window.event.keyCode == 13) {
+		window.event.keyCode = 505
+	}
+}
+</script>
