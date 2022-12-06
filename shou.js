@@ -1,8 +1,9 @@
 /**
- * LEO code
+ * Syc <github.com/SycAlright>
+ * Beast_SDK JavaScript
  */
 
-const beastDictArr = ['鍡�', '鍛�', '鍟�', '~']
+const beastDictArr = ['嗷', '呜', '啊', '~']
 
 function encode(rawStr) {
     let charArr = rawStr.split("")
@@ -71,7 +72,7 @@ function decode(beastStr) {
 function focusNextInput(thisInput) {
     var inputs = document.getElementsByTagName("input");
     for (var i = 0; i < inputs.length; i++) {
-        // 濡傛灉鏄渶鍚庝竴涓紝鍒欑劍鐐瑰洖鍒扮涓€涓�
+        // 如果是最后一个，则焦点回到第一个
         if (i == (inputs.length - 1)) {
             inputs[0].focus();
             break;
@@ -85,14 +86,14 @@ var title = document.getElementById('title');
 var set = document.getElementById('set').onclick = function(){
     var content = document.getElementById('content');
     if(!content.value){
-        title.innerText = '璇疯緭鍏ラ渶瑕佸姞/瑙ｅ瘑鐨勫唴瀹�';
-        alert('璇疯緭鍏ラ渶瑕佸姞瀵嗙殑鍐呭');
+        title.innerText = '请输入需要加/解密的内容';
+        alert('请输入需要加密的内容');
         return false;
     }else{
         content.value = encode(content.value);
-        title.innerText = '鍔犲瘑缁撴灉';
-        //alert('鍔犲瘑瀹屾垚');
-        var userreturn = confirm('鍔犲瘑瀹屾垚鏄惁澶嶅埗锛�');
+        title.innerText = '加密结果';
+        //alert('加密完成');
+        var userreturn = confirm('加密完成是否复制？');
         if(userreturn){
             content.select();
             document.execCommand('copy');
@@ -105,14 +106,14 @@ var set = document.getElementById('set').onclick = function(){
 var setto = document.getElementById('setto').onclick = function(){
     var content = document.getElementById('content');
     if(!content.value){
-        title.innerText = '璇疯緭鍏ラ渶瑕佸姞/瑙ｅ瘑鐨勫唴瀹�';
-        alert('璇疯緭鍏ラ渶瑕佽В瀵嗙殑鍐呭');
+        title.innerText = '请输入需要加/解密的内容';
+        alert('请输入需要解密的内容');
         return false;
     }else{
         content.value = decode(content.value);
-        title.innerText = '瑙ｅ瘑缁撴灉';
-        //alert('瑙ｅ瘑瀹屾垚');
-        var userreturn = confirm('瑙ｅ瘑瀹屾垚鏄惁澶嶅埗锛�');
+        title.innerText = '解密结果';
+        //alert('解密完成');
+        var userreturn = confirm('解密完成是否复制？');
         if(userreturn){
             content.select();
             document.execCommand('copy');
@@ -125,7 +126,7 @@ var setto = document.getElementById('setto').onclick = function(){
 var content = document.getElementById('content');
 content.oninput = function(){
     if(!content.value){
-        title.innerText = '璇疯緭鍏ラ渶瑕佸姞/瑙ｅ瘑鐨勫唴瀹�';
+        title.innerText = '请输入需要加/解密的内容';
         return true;
     }
     return false;
