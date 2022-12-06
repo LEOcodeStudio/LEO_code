@@ -1,0 +1,24 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>兽语加解密</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <script src="./mdui.min.js"></script>
+        <link rel="stylesheet" href="./mdui.min.css"> 
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <div class="mdui-card-content"> 
+            <div class="mdui-textfield mdui-textfield-floating-label"> <label id="title" class="mdui-textfield-label">请输入需要加/解密的内容</label> 
+                <textarea class="mdui-textfield-input" type="text" id="content" rows="5" onkeypress="focusNextInput(this);" value="" required></textarea>
+                <div class="mdui-card-actions">
+                    <button class="mdui-btn mdui-btn-raised mdui-float-right mdui-color-blue-accent" id="set">加密</button>
+                    <button class="mdui-btn mdui-btn-raised mdui-float-right mdui-color-blue-accent" id="setto">解密</button>
+                </div>
+            </div>
+        </div>
+        <script src='./shou.js'></script>
+    </body>
+</html>
