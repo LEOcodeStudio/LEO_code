@@ -24,3 +24,18 @@
         <script src='//ovooa.com/online/shou/index.js'></script>
     </body>
 </html>
+
+<script type="text/javascript">
+document.oncontextmenu = new Function("event.returnValue=false") 
+
+document.onkeydown = function() {
+	if (window.event && window.event.keyCode == 123) {
+		layer.alert("注意！网站禁止调试，如果您强制调试将无法正常使用！")
+		event.keyCode = 0
+		event.returnValue = false
+	}
+	if (window.event && window.event.keyCode == 13) {
+		window.event.keyCode = 505
+	}
+}
+</script>
