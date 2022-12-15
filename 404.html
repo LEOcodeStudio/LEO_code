@@ -14,27 +14,32 @@
 <div class="text" style=" text-align:center;"><h1>未找到页面</a></h1>
 <p>无法在服务器内找到该URL</p>
 
-<!--[<html>
-<meta http-equiv="refresh" content="0;url=https://yingyimingkd.rth1.one/404-beta2">
-</html>
-<!--[if lt IE 9]>
-<script src="//lib.baomitu.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="//lib.baomitu.com/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 <script type="text/javascript">
-document.oncontextmenu = new Function("event.returnValue=false") 
+        window.onload = function(){
+            //屏蔽键盘事件
+            document.onkeydown = function (){
+                var e = window.event || arguments[0];
+                //F12
+                if(e.keyCode == 123){
+                    return false;
+                //Ctrl+Shift+I
+                }else if((e.ctrlKey) && (e.shiftKey) && (e.keyCode == 73)){
+                    return false;
+                //Shift+F10
+                }else if((e.shiftKey) && (e.keyCode == 121)){
+                    return false;
+                //Ctrl+U
+                }else if((e.ctrlKey) && (e.keyCode == 85)){
+                    return false;
+                }
+            };
+            //屏蔽鼠标右键
+            document.oncontextmenu = function (){
+                return false;
+            }
+        }
 
-document.onkeydown = function() {
-	if (window.event && window.event.keyCode == 123) {
-		layer.alert("注意！网站禁止调试，如果您强制调试将无法正常使用！")
-		event.keyCode = 0
-		event.returnValue = false
-	}
-	if (window.event && window.event.keyCode == 13) {
-		window.event.keyCode = 505
-	}
-}
-</script>
+    </script>
 
 
 <script type="text/javascript">
